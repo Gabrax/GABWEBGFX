@@ -94,7 +94,12 @@ const pages = {
 const content = document.getElementById("content");
 const links = document.querySelectorAll("[data-page]");
 
-async function loadPage(name: string) {
+async function loadPage(name: string)
+{
+  if (currentPage && typeof currentPage.destroy === "function") {
+    currentPage.destroy();
+  }
+
   content.classList.remove("visible");
 
   links.forEach(l => l.classList.remove("active"));

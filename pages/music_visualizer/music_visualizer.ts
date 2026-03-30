@@ -99,6 +99,18 @@ export class MusicVisualizerPlayer
     this.loadTrack(this.index);
   }
 
+  destroy()
+  {
+    this.audio.pause();
+    this.audio.src = "";
+
+    if (this.analyser) this.analyser.disconnect();
+
+    if (this.ctx && this.ctx.state !== "closed") {
+      this.ctx.close();
+    }
+  }
+
   private initAudio()
   {
     this.ctx = new AudioContext();
